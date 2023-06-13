@@ -427,7 +427,7 @@ cvx_begin
 
  % EV energy
     e(1,:) == e0                                                                    % initial condition
-    e(K+1,:) == 0.3.*eMax(1,:)                                                    %eBase(K+1,:) % terminal condition: return to initial charge
+    e(K+1,:) == 0.3.*eMax(1,:)                                                   % terminal condition
     e(2:K+1,:) == repmat(a2,K,1).*e(1:K,:)...
         + (1-repmat(a2,K,1)).*repmat(tau,K,1).*...
         (repmat(etac,K,1).*(ph + pw) - pd./repmat(etad,K,1))
