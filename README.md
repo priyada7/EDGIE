@@ -8,7 +8,5 @@ Thank you for your interest in EDGIE!
 INSTALLATION & DOCUMENTATION
 ------------
 
-For full installation instructions, please see the Installation section of the
-users' guide, which can be found in user guide.
-
+For full installation and detailed information please look into the UserGuide.pdf
 
