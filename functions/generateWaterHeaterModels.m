@@ -41,7 +41,7 @@ w = zeros(K,L); % thermal power withdrawals, one column per load, kW
 % shuffle
 w0 = reshape(w0,24/dt,365); % reshape one-load data to one column per day
 for i=1:L
-    w(:,i) = vec(w0(:,randperm(365))); % shuffle columns and store the result as one stacked column
+    w(:,i) = vecX(w0(:,randperm(365))); % shuffle columns and store the result as one stacked column
 end
 
 %% define tank parameters
