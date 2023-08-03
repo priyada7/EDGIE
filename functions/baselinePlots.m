@@ -1,5 +1,36 @@
 function []=baselinePlots(t,Tbase2,K,p1base,eBase,eMax,phBase,pwBase,pdBase,lw,fs,tLim,tTicks,tt,P,s,HPWHload,HPload,summerPeak)
 
+% this function is used to generate base line plots and generates the
+% overall load profile with different appliances 
+%
+% Input:
+%  t,(K+1)x1 vector of timesteps, h
+%  Tbase2, (K+1)xn1 vector of indoor temperature, C
+%  p1Base, Kxn1 vector of electrical consumption from heat pump, kW
+%  eBase, (K+1)xn2 vector of stored energy in battery, kWh
+%  eMax, n2xK vector of energy capacity, kWh 
+%  phBase, Kxn2 vector of power consumption from ev at home, kW
+%  pwBase, Kxn2 vector of power consumption from ev at work, kW
+%  pdBase, Kxn2 vector of ev discharge power, kW
+%  lw, linedwidth parameter for plot
+%  fs, fontsize parameter for plot
+%  tLim, 1x2 vector of time limits
+%  tt, date timespan
+%  P, Kx1 vector of non-electrical load, kW
+%  s, parameter to determine scale of plots
+%  HPWHload, (K+1)xn1 vector of water heater electrical consumption, kW
+%  HPload, Kxn1 vector of heatpump electrical consumption, kW
+%  summerPeak, paramter for summer peak
+%
+% Output:
+%  emperature plot
+%  heat pump plot
+%  energy plot
+%  home charge plot
+%  work charge plot
+%  discharge plot
+%  overall loadprofile plot
+
 % temperature plot
 figure(1), clf
 subplot(2,1,1), plot(t,Tbase2,'linewidth',lw), grid on

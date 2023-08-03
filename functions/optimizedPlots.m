@@ -1,4 +1,35 @@
-function optimizedPlots(tt,t,T,K,p1,e,eMax,ph,pw,pd,lw,fs,tLim,tTicks,tf,P,p1base,phBase,atHome,atWork,summerPeak,pWorkBase,p1basehpwh,p2,s)
+function optimizedPlots(tt,t,T,K,p1,e,eMax,ph,pw,pd,lw,fs,tLim,tTicks,tf,P,p1base,phBase,atHome,atWork,summerPeak,...
+    pWorkBase,p1basehpwh,p2,s)
+
+% this function is used to generate base line plots and generates the
+% overall load profile with different appliances 
+%
+% Input:
+%  tt, (K+1)x1 vector of dates
+%  t,(K+1)x1 vector of timesteps, h
+%  T, (K+1)xn1 matrix of indoor temperature, h
+%  K, number of time steps
+%  p1, Kxn1 matrix of heat pump load, kW
+%  e, (K+1)xn2 matrix of stored energy, kWh
+%  eMax, 1xn2 vector of max energy capacity, kWh
+%  ph, Kxn2 matrix of home electrical consumption  due to ev, kW
+%  pw Kxn2 matrix of work electrical consumption  due to ev, kW
+%  lw, linedwidth parameter for plot
+%  fs, fontsize parameter for plot
+%  tLim, 1x2 vector of time limits
+%  tTicks, 
+%  tf, end time, h
+%  P, Kx1 vector of non-electrical load, kW
+%  p1Base, Kxn1 vector of electrical consumption from heat pump, kW
+%  phBase, Kxn2 vector of power consumption from ev at home, kW
+%  atHome,indicator that vehicle's at home
+%  atWork, indicator that vehicle's at work
+%  summerPeak, paramter for summer peak, kW
+%  pWorkBase, Kx1 vector of woek place electrical load, kW
+%  p1basehpwh, Kx1 vector of water heater electrical load, kW
+%  p2, Kx1 vector of water heater electrical load, kW
+%  s, parameter to determine scale of plots
+
 
 % temperature plot
 figure(4), clf

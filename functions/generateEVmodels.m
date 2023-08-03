@@ -1,4 +1,33 @@
-function [a2,etac,etad,eMin,eMax,pcMax,pdMax,tau,e0,p0,ec,atHome,atWork,onRoad,tw,th] = generateEVmodels(n2,nDays,K,theta,batteryDeg,dt,t)
+function [a2,etac,etad,eMin,eMax,pcMax,pdMax,tau,e0,p0,ec,atHome,atWork,onRoad,tw,th] = generateEVmodels...
+    (n2,nDays,K,theta,batteryDeg,dt,t)
+% this function is used to generate input parameters for electric vehicle
+% simulation
+%
+% Input:
+%  n2, number of homes
+%  nDays, number of days
+%  K, number of time steps
+%  theta, Kx1 vector of outdoor temperature, C
+%  batteryDeg, indicator for battery degraation effects 
+%  dt, time sep, h
+%  t, (K+1)x1 vector of time span, h
+%
+% Output:
+%  a2, 1xn1 matrix of discrete-time dynamics parameters
+%  etac, 1xn2 vector of charge efficiency
+%  etad, 1xn2 vector of discharge efficiency 
+%  eMin, n2xK matrix of min-energy capacity, kWh 
+%  eMax, n2xK matrix of max-energy capacity, kWh 
+%  pcMax, n2xK matrix of charge capacity, kW
+%  pdMax, n2xK matrix of discharge capacity, kW
+%  tau, KxL matrix of dissipation rate, 1/h
+%  e0, initial energy of ev battery, kWh
+%  ec, 1xn2 vector of commute energy, kWh
+%  atHome,indicator that vehicle's at home
+%  atWork, indicator that vehicle's at work
+%  onRoad, indicator that vehicle's on the road
+%  tw, 1xn2 vector for commute to work time of day, h
+%  th, 1xn2 vector forcommute to home time of day, h
 
 % electric vehicle batteries
 rho = trirnd(0.97,0.99,1,n2);       % fraction of charge remaining after 24 h

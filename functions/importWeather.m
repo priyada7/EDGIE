@@ -9,8 +9,7 @@ function [temperature,shortwave] = importWeather(fileName,t) %,shortwave,windspe
 % Output:
 %   temperature, the outdoor temperature in C
 %   shortwave, the global solar shortwave irradiance on a horizontal surface in kW/m^2
-%   windspeed, the wind speed in m/s
-%   humidity, the relative humidity in [0,1]
+
 
 % import raw data
 opts = detectImportOptions(fileName);

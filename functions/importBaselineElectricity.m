@@ -1,4 +1,17 @@
 function [P,summerPeak] = importBaselineElectricity(fileName,tStart,tEnd,weatherTime,n1)
+% this function performs the baseline or no electrical load calculation 
+%
+% Input:
+%  filename, name of the load file 
+%  tStart, start date for simulation
+%  tEnd, end date for simulation
+%  weatherTime, timespan of weather file
+%  n1, number of homes
+%
+% Output:
+%  P, Kx1 vector for neighnorhood base electrical power, kW
+%  summerPeak, summer peak aggregate power, kW
+
 opts = detectImportOptions(fileName);
 opts.PreserveVariableNames = 1;
 rawData = readtable(fileName,opts);
@@ -21,6 +34,7 @@ powerData = fillmissing(powerData,'linear');
 annualElectricityPerHome = 115e9/(10.8e6);                  % RECS 2015 Table CE4.2 annual kWh per single-family detached home in Northeast
 neighborhoodElectricity = n1*annualElectricityPerHome;      % neighborhood annual kWh
 powerData.aggregatePower = neighborhoodElectricity*powerData.aggregatePower/sum(powerData.aggregatePower);
+
 
 % extract a representative load period
 P = powerData.aggregatePower(powerData.powerTime>=tStart & powerData.powerTime<tEnd);

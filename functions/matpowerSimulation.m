@@ -1,6 +1,32 @@
     
-function  [IpuUnopt,IpuOpt,Tamb]=matpowerSimulation(phBase,ph,atHome,pd,n2,nDays,P,n1,p1basehpwh,p1base,p1,p2,perBushome,fs,theta)
+function  [IpuUnopt,IpuOpt,Tamb]=matpowerSimulation(phBase,ph,atHome,pd,n2,nDays,...
+    P,n1,p1basehpwh,p1base,p1,p2,perBushome,fs,theta)
  
+% this function is used to generate compute power distribution calulation using MATPOWER 
+% and generates the voltage profile for teh distribution network IEEE-33bus
+%
+% Input:
+%  phBase, Kxn2 vector of power consumption from ev at home, kW
+%  ph, Kxn2 matrix of home electrical consumption  due to ev, kW
+%  atHome,indicator that vehicle's at home
+%  pd, Kxn2 matrix of discharge power, kW
+%  n2, number of ev
+%  nDays, number of days
+%  P, Kx1 vector of non-electrical load, kW
+%  n1, number of home
+%  p1basehpwh, Kx1 vector of water heater electrical load, kW
+%  p1Base, Kxn1 vector of electrical consumption from heat pump, kW
+%  p1, Kxn1 matrix of heat pump load, kW
+%  p2, Kx1 vector of water heater electrical load, kW
+%  perBushome, number of homes per bus
+%  fs, fontsize parameter for plot
+%  theta, Kx1 vector of outdoor temperature, C
+% 
+% Output:
+%  IpuUnopt, Kx1 vector of unoptimized per unit current
+%  IpuOpt, Kx1 vector of optimized per unit current
+%  Tamb, Kx1 vector of outdoor temperature, C
+
     Unopt=phBase;
     Opt=ph-atHome.*pd;
 

@@ -1,5 +1,26 @@
 
 function [p1basehpwh,HPWHload,Tbasew,Tsetw]=heatPumpWaterHeaterSimulation(K,L,pMaxHP,etaw,pMaxR,aw,Rw,ww,thetaw)
+
+% this function performs the simulation of resistance water heater
+%
+% Input:
+%  K, number of time steps
+%  L, number of homes with water heaters
+%  pMaxHP, 1xL vector of max electical capcity of heat pump, kW
+%  etaw, KxL matrix of heat pump COP
+%  pMaxR, 1xL vector of max resistance power, kW
+%  aw, 1xL matrix of discrete-time dynamics parameters
+%  Rw, 1xL vector of thermal resistances, C/kW
+%  ww, KxL matrix of exogenous thermal power, kW
+%  thetaw, Kx1 vector of water temperature, C
+%
+%
+% Output:
+%  p1basehpwh, KxL matrix for heat-pump water heater electric power, kW
+%  HPWHload, Lx1 vector for heat-pump water heater electrical power, kW
+%  Tbasew, (K+1)xL matrix for water temperature, C
+%  Tsetw, (K+1)xL matrix of heating temperature setpoint, C
+
 Kw=K;
 Qcw2=zeros(Kw,L);
 Tsetw = repmat(f2c(trirnd(120,130,1,L)),Kw+1,1);
