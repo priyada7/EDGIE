@@ -9,9 +9,9 @@ clear
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 batteryDeg =   1; % battery degradation with outside temperature is implemented
-matpower   =   1; % set 1 if voltage regulations needs to be solved
-transformer=   1; % set 1 if thermal model of transformer needs to be solved
-optimization = 1; % set 1 for v2h
+matpower   =   0; % set 1 if voltage regulations needs to be solved
+transformer=   0; % set 1 if thermal model of transformer needs to be solved
+optimization = 0; % set 1 for v2h
 rng(1)
 
 
@@ -26,7 +26,7 @@ tf = nDays*24;               % final time, h
 dt = 1;                      % time step, h
 K = tf/dt;                   % number of time steps
 t = (0:dt:tf)';              % time span, h
-n1 = 66;                     % number of homes (= number of HPs)
+n1 = 100;                     % number of homes (= number of HPs)
 carsPerHome = 2;             % number of cars per home
 n2 = carsPerHome*n1;         % number of EVs
 perBushome = 2;              % factor which decides how many house loads will be on each bus of 33 bus network (normally 990 homes gives 30 homes on each bus in a 33 bus network)
