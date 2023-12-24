@@ -32,7 +32,7 @@ n2 = carsPerHome*n1;         % number of EVs
 perBushome = 2;              % factor which decides how many house loads will be on each bus of 33 bus network (normally 990 homes gives 30 homes on each bus in a 33 bus network)
 L = n1;                      % number of water heater
 
-weatherfileName = 'New York.csv';                   % load weather file
+weatherfileName = 'New York.csv';                   % load weather file other sample weather files is present in input files
 loadfileName = 'MFRED-2019-NYC-Apartments-Electricity-Data.csv';  % load base load file
 waterfile    = 'DHWEventGeneratorOutput.csv';                     % load water schduler file
 
