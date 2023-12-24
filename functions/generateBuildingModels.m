@@ -41,6 +41,7 @@ thetaHigh = f2c(45);                                    % second temperature poi
 etaLow = trirnd(1.5,2,1,n1);                            % first COP point
 etaHigh = etaLow + 1.5 + trirnd(0,0.5,1,n1);            % second COP point
 eta1 = etaLow + (etaHigh-etaLow).*(theta-thetaLow)./(thetaHigh-thetaLow); % COP curve
+eta1(eta1 < 1)=1;
 Tset = repmat(f2c(trirnd(65,74,1,n1)),K+1,1);                             % heating temperature setpoint, C, tuned to cold-climate occupied values in RECS 2015 Table HC6.6
 nSetback = 0;                                                             %round(n1/2); % number of units with night setbacks
 for i=1:nSetback
