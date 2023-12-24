@@ -10,3 +10,8 @@ INSTALLATION & DOCUMENTATION
 
 For full installation and detailed information please look into the UserGuide.pdf
 
+
+TROUBLESHOOT
+------------
+
+In case of any issue, feel free to reach out at priyada@purdue.edu
