@@ -12,6 +12,7 @@ batteryDeg =   1; % battery degradation with outside temperature is implemented
 matpower   =   0; % set 1 if voltage regulations needs to be solved
 transformer=   0; % set 1 if thermal model of transformer needs to be solved
 optimization = 0; % set 1 for v2h
+waterheater = 1;  % 1-resistance 2- hp only 3 - hpwh
 rng(1)
 
 
@@ -26,13 +27,13 @@ tf = nDays*24;               % final time, h
 dt = 1;                      % time step, h
 K = tf/dt;                   % number of time steps
 t = (0:dt:tf)';              % time span, h
-n1 = 100;                     % number of homes (= number of HPs)
+n1 = 2;                     % number of homes (= number of HPs)
 carsPerHome = 2;             % number of cars per home
 n2 = carsPerHome*n1;         % number of EVs
 perBushome = 2;              % factor which decides how many house loads will be on each bus of 33 bus network (normally 990 homes gives 30 homes on each bus in a 33 bus network)
 L = n1;                      % number of water heater
 
-weatherfileName = 'New York.csv';                   % load weather file other sample weather files is present in input files
+weatherfileName = 'New York_HistoricalWeather.csv';                   % load weather file
 loadfileName = 'MFRED-2019-NYC-Apartments-Electricity-Data.csv';  % load base load file
 waterfile    = 'DHWEventGeneratorOutput.csv';                     % load water schduler file
 
@@ -43,7 +44,7 @@ waterfile    = 'DHWEventGeneratorOutput.csv';                     % load water s
 % import weather data
 weatherTime = (datetime(2019,1,1,0,0,0):hours(dt):datetime(2020,1,1,0,0,0))';
 [thetaFull,solarFull] = importWeather(weatherfileName,weatherTime);
-tStart = datetime(2019,1,1,0,0,0)             % Start date for simulation
+tStart = datetime(2019,1,18,0,0,0)             % Start date for simulation
 tEnd = tStart + hours(tf);                    % End date for simulation
 tt = (tStart:hours(dt):tEnd)';
 theta = thetaFull(weatherTime>=tStart & weatherTime<tEnd);
@@ -82,7 +83,7 @@ solar = solarFull(weatherTime>=tStart & weatherTime<tEnd);
 [phBase,pwBase,eBase,pdBase] = evSimulation(K,n2,e0,p0,eMin,eMax,pcMax,a2,tau,etac,etad,dt,ec,onRoad,atHome,atWork);
 
  % heat-pump water heaters
-[p1basehpwh,HPWHload,Tbasew,Tsetw] = heatPumpWaterHeaterSimulation(K,L,pMaxHP,etaw,pMaxR,aw,Rw,ww,thetaw);
+[p1basehpwh,HPWHload,Tbasew,Tsetw] = heatPumpWaterHeaterSimulation(K,L,pMaxHP,etaw,pMaxR,aw,Rw,ww,thetaw,waterheater);
 
 
 
