@@ -41,7 +41,7 @@ pcMax = 240*trirnd(24,48,1,n2)/1e3; % charge capacity, kW (level 2: 240 V, 24-32
 pdMax = trirnd(30,40,1,n2);                 % discharge capacity, kW (100 mile/h at 0.35 kWh/mile: 35 kW)
 eMax = 54 + trirnd(0,28,1,n2);              % energy capacity, kWh (Tesla Model 3, 54-82 kWh)
 eMin = trirnd(0.15,0.25,1,n2).*eMax;        % user-specified minimum energy, kWh
-e0 = eMin + rand(1,n2).*(eMax-eMin);  % initial energy, kWh
+e0 = eMin + trirnd(0,1,1,n2).*(eMax-eMin);  % initial energy, kWh
 daysPerCharge = 5.5;                        % average number of days between full charges
 p0 = (rand(1,n2)<=1/daysPerCharge).*pcMax;  % initial charging power, kW
 

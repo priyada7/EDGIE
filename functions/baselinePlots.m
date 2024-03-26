@@ -70,9 +70,9 @@ xlabel('Hour','fontsize',fs)
 
 figure(3), clf
 fullStairs(tt,P/s,LineWidth=2); hold on
-fullStairs(tt,P/s + HPWHload(1:end-1)/s,'m',LineWidth=2),
-fullStairs(tt,P/s + HPWHload(1:end-1)/s + sum(phBase,2)/s ,'g',LineWidth=2),
-fullStairs(tt,P/s + HPWHload(1:end-1)/s + sum(phBase,2)/s + HPload/s,'k',LineWidth=2)
+fullStairs(tt,P/s + HPWHload/s,'m',LineWidth=2),
+fullStairs(tt,P/s + HPWHload/s + sum(phBase,2)/s ,'g',LineWidth=2),
+fullStairs(tt,P/s + HPWHload/s + sum(phBase,2)/s + HPload/s,'k',LineWidth=2)
 yline(summerPeak/s,'r',LineWidth=2,LineStyle=":")
 if s==1e3, ylabel('Aggregate power (MW)','fontsize',24), end
 if s==1, ylabel('Aggregate power (kW)','fontsize',24), end

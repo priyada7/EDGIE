@@ -32,7 +32,7 @@ rhoc = 3.42e-4;                                         % volumetric thermal cap
 C = trirnd(16,18,1,n1).*(rhoc*floorArea.*ceilingHeight); % thermal capacitance, kWh/C
 
 thetaBase = f2c(50);                                    % base temperature for heading degree-hours, C
-RValue = gauss(550,550,1,n1);                           % m^2*C/kW, value obtained from DC house validation
+RValue = gauss(500,500,1,n1);                           % m^2*C/kW, value obtained from DC house validation
 R = RValue./(4.*ceilingHeight.*sqrt(2.*floorArea));     % thermal resistance, C/kW
 
 a1 = exp(-dt./(R.*C));                                  % discrete-time dynamics parameter
@@ -41,7 +41,6 @@ thetaHigh = f2c(45);                                    % second temperature poi
 etaLow = trirnd(1.5,2,1,n1);                            % first COP point
 etaHigh = etaLow + 1.5 + trirnd(0,0.5,1,n1);            % second COP point
 eta1 = etaLow + (etaHigh-etaLow).*(theta-thetaLow)./(thetaHigh-thetaLow); % COP curve
-eta1(eta1 < 1)=1;
 Tset = repmat(f2c(trirnd(65,74,1,n1)),K+1,1);                             % heating temperature setpoint, C, tuned to cold-climate occupied values in RECS 2015 Table HC6.6
 nSetback = 0;                                                             %round(n1/2); % number of units with night setbacks
 for i=1:nSetback

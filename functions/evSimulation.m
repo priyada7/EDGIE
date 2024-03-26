@@ -26,6 +26,9 @@ function [phBase,pwBase,eBase,pdBase]=evSimulation(K,n2,e0,p0,eMin,eMax,pcMax,a2
 %  pwBase, Kxn2 matrix of power consumption from ev at work, kW
 %  pdBase, Kxn2 matrix of ev discharge power, kW
 
+
+
+%%%%
 eBase = zeros(K+1,n2); % stored energy, kWh
 eBase(1,:) = e0;
 pcBase = zeros(K,n2); % home or work charge power, kW
@@ -37,7 +40,7 @@ for k=1:K
     else
         pck = pcBase(k-1,:);
     end
-    
+   
     % start charging if energy dropped below minimum
     pck(eBase(k,:)<eMin) = pcMax(eBase(k,:)<eMin);
     
