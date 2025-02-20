@@ -27,13 +27,11 @@ K = tf/dt;                   % number of time steps
 t = (0:dt:tf)';              % time span, h
 n1 = 1000;                   % number of homes (= number of HPs)
 carsPerHome = 2;             % number of cars per home
-%n2 = carsPerHome*n1;         % number of EVs
-perBushome = 30;             % factor which decides how many house loads will be on each bus of 33 bus network (normally 990 homes gives 30 homes on each bus in a 33 bus network)
 L = n1;                      % number of water heater
 ft2m2 = 0.092903;
 
 % Read the CSV file
-data = readtable('version13.xlsx');
+data = readtable('MetaData.xlsx');
 
 % Filter cities for state_id = 'AZ'
 stateAZ = data(strcmpi(data.state_id, stateAbbr), :);
