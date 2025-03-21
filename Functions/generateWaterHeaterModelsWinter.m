@@ -65,12 +65,11 @@ metricTankRValue = englishTankRValue*... % tank R-Value in metric units, C*m^2/k
     celsiusPerFahrenheit*squareMetersPerSquareFoot/kWPerBTUh;
 R = metricTankRValue./tankArea; % tank thermal resistance, C/kW
 a = exp(-dt./(R.*C)); % discrete-time dynamics parameter
-eta = repmat(3,K,L);
-
+eta = trirnd(2.5,3,K,L);
 
 theta = repmat(f2c(60),K,1); % ambient temperature surrounding tank, C theta =f2c(60); % modified by pd on 27th march,2023
 pMaxHP = repmat(0.5,1,L); % pMaxHP = 0.5; % heat pump electrical capacity, kW
-pMaxR = repmat(9,1,L); % 
+pMaxR = repmat(4.5,1,L); % 
 
 for i=1:length(timeSpan)
     if tStart == timeSpan(i)
