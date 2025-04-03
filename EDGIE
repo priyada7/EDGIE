@@ -405,9 +405,9 @@ winterPeak =  quantile(  sum(waterHeatingLoadWinter,2) + Pwinter + electricPower
 
 %% summer peak
     check=0;
-    [electricPower_detached,~,waterHeatingLoad_detached]=summerPeakcalc(thetaSummer,solarSummer,dt,Psummer,n1,weatherTime,R,cap2_detached_summer_all,HPWHloadSummer,homeWithElectricWH,p1basehpwhSummer,floorAreaDetached,check);
+    [electricPower_detached,~,waterHeatingLoad_detached]=summerPeakcalc(thetaSummer,solarSummer,dt,Psummer,n1,weatherTime,R_detached,cap2_detached_summer_all,HPWHloadSummer,homeWithElectricWH,p1basehpwhSummer,floorAreaDetached,check);
     check=1;
-    [electricPower_attached,~,~]=summerPeakcalc(thetaSummer,solarSummer,dt,Psummer,n1,weatherTime,R,cap2_attached_summer_all,HPWHloadSummer,homeWithElectricWH,p1basehpwhSummer,floorAreaAttached,check);
+    [electricPower_attached,~,~]=summerPeakcalc(thetaSummer,solarSummer,dt,Psummer,n1,weatherTime,R_attached,cap2_attached_summer_all,HPWHloadSummer,homeWithElectricWH,p1basehpwhSummer,floorAreaAttached,check);
     
  summerPeak = quantile(  sum(waterHeatingLoad_detached,2) + Psummer + sum(electricPower_attached(:,1:round(n1*percentageAttached)),2) + sum(electricPower_detached(:,1:n1-round(n1*percentageAttached)),2),0.999);
 
