@@ -100,7 +100,7 @@ individualPower = timetable(powerTime,Power);
 individualPower = retime(individualPower,weatherTime);
 individualPower = fillmissing(individualPower,'linear');
 
-for stateIdx = 1:length(arizonacities)
+for stateIdx = 27 %1:length(arizonacities) 27 is for Minneapolis, MN chech indices in variable stateAZ
     cityName = arizonacities{stateIdx};
     stateName = USAstateName{stateIdx};
     countyName = USAcountyNAme{stateIdx};
