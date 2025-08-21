@@ -67,10 +67,10 @@ R = metricTankRValue./tankArea; % tank thermal resistance, C/kW
 a = exp(-dt./(R.*C)); % discrete-time dynamics parameter
 eta = trirnd(2.5,3,K,L);
 
+
 theta = repmat(f2c(60),K,1); % ambient temperature surrounding tank, C theta =f2c(60); % modified by pd on 27th march,2023
 pMaxHP = repmat(0.5,1,L); % pMaxHP = 0.5; % heat pump electrical capacity, kW
-pMaxR = repmat(12,1,L); % 
-
+pMaxR = repmat(4.5,1,L); % 
 for i=1:length(timeSpan)
     if tStart == timeSpan(i)
         startIndex = i;
