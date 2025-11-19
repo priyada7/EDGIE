@@ -38,8 +38,17 @@ etad = etac;                        % discharge efficiency
 pcMax = 240*trirnd(24,48,1,n2)/1e3; % charge capacity, kW (level 2: 240 V, 24-32 A)
 
 
+sedans = round(percentageSedans*n2);
+pickupTruck = n2-sedans;
+
 pdMax = trirnd(30,40,1,n2);                 % discharge capacity, kW (100 mile/h at 0.35 kWh/mile: 35 kW)
-eMax = 54 + trirnd(0,28,1,n2);              % energy capacity, kWh (Tesla Model 3, 54-82 kWh)
+if sedans>0
+    eMax_sedan = 54 + trirnd(0,28,1,sedans);              % energy capacity, kWh (Tesla Model 3, 54-82 kWh)
+end
+if pickupTruck>0
+eMax_pickup = 120 + trirnd(0,28,1,pickupTruck);  
+end
+eMax =[eMax_sedan,eMax_pickup];
 eMin = trirnd(0.25,0.35,1,n2).*eMax;        % user-specified minimum energy, kWh
 e0 = eMin + rand(1,n2).*(eMax-eMin);  % initial energy, kWh
 %e0 = eMin + trirnd(0,1,1,n2).*(eMax-eMin);  % initial energy, kWh
@@ -67,8 +76,7 @@ if batteryDeg ==1
     ec1=commuteDistance.*trirnd(min(sedanEff),max(sedanEff),1,n2);
     ec2=commuteDistance.*trirnd(min(pickupTruckEff),max(pickupTruckEff),1,n2);
 
-   sedans = round(percentageSedans*n2);
-   pickupTruck = n2-sedans;
+ 
 
     % Generate random indices for selecting columns from ec1
     indices_ec1 = randperm(size(ec1, 2),sedans)
