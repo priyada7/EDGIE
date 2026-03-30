@@ -1,5 +1,5 @@
 # EDGIE
-This repository contains code that simulates the impacts of electric vehicles, heat pumps, and heat-pump water heaters on the distribution grid.
+This repository contains code that simulates the impacts of electric vehicles, heat pumps, and heat-pump water heaters on the distribution grid. It also includes a vehicle-to-home strategy to reduce the peak demand.
 
 --------------------------------------------------------
 
