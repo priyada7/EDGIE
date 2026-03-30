@@ -1,29 +1,22 @@
 function [cooling_val_95F, cooling_val_82F, heating_val_5C, heating_val_45C] = select_best_hvac_Cooling(x_target, y_target)
     
    % Define available files
-    file_list = {'2ton_A_cooling.csv', '2ton_B_cooling.csv', ...
-        '3ton_C_cooling.csv', '3ton_A_cooling.csv', '3ton_B_cooling.csv', ...
-        '4ton_C_cooling.csv', '4ton_A_cooling.csv', '4ton_B_cooling.csv', ...
-        '5ton_C_cooling.csv', '5ton_A_cooling.csv', '5ton_B_cooling.csv',...
-        '6ton_C_cooling.csv', '6ton_A_cooling.csv', '6ton_B_cooling.csv',...
-        '7ton_C_cooling.csv', '7ton_A_cooling.csv', '7ton_B_cooling.csv',...
-        '8ton_C_cooling.csv', '8ton_A_cooling.csv', '8ton_B_cooling.csv'};
+    file_list = {'2ton_rheem_cooling.csv', '2ton_trane_cooling.csv', ...
+        '3ton_carrier_cooling.csv', '3ton_rheem_cooling.csv', '3ton_trane_cooling.csv', ...
+        '4ton_carrier_cooling.csv', '4ton_rheem_cooling.csv', '4ton_trane_cooling.csv', ...
+        '5ton_carrier_cooling.csv', '5ton_rheem_cooling.csv', '5ton_trane_cooling.csv',...
+        '6ton_carrier_cooling.csv', '6ton_rheem_cooling.csv', '6ton_trane_cooling.csv',...
+        '7ton_carrier_cooling.csv', '7ton_rheem_cooling.csv', '7ton_trane_cooling.csv',...
+        '8ton_carrier_cooling.csv', '8ton_rheem_cooling.csv', '8ton_trane_cooling.csv'};
  
-
+%    
     % Initialize best cooling unit selection
     best_curve_error = inf;
     best_tonnage = '';
     best_manufacturer = '';
     best_cooling_data = [];
     
-%     figure;
-%     hold on;
-%     xlabel('Temperature (°C)');
-%     ylabel('Cooling Capacity (Wh)');
-%     title('Linear Fits of HVAC Cooling Units');
-%     grid on;
-%     colors = lines(length(file_list));  % Generate different colors for each curve
-    
+
     % --- COOLING SELECTION ---
     for i = 1:length(file_list)
         filename = file_list{i};
@@ -73,16 +66,7 @@ function [cooling_val_95F, cooling_val_82F, heating_val_5C, heating_val_45C] = s
     % Compute cooling values
     cooling_val_82F = polyval(best_cooling_data, f2c(82));
     cooling_val_95F = polyval(best_cooling_data, f2c(95));
-       % fprintf('Best Cooling Unit: %s\n', best_cooling_file);
-        % Plot target point
-   % scatter((x_target), y_target, 100, 'k', 'filled', 'DisplayName', 'Target Point');
-    % Plot best-fit line
-%     x_best_fit = linspace(f2c(60), f2c(110), 100);  % Extend range for visualization
-%     y_best_fit = polyval(best_cooling_data, x_best_fit);
-   % plot(x_best_fit, y_best_fit, 'k--', 'LineWidth', 2.5, 'DisplayName', 'Best Fit');
-    
-%     legend('show');
-%     hold off;
+     
     % --- HEATING SELECTION ---
     heating_filename = sprintf('%s_%s_heating.csv', best_tonnage, best_manufacturer);
     

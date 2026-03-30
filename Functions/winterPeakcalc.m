@@ -1,26 +1,6 @@
 function [electricPowerWinter,waterHeatingLoad]=winterPeakcalc(zone,thetaFull,solarFull,dt,fullP,n1,weatherTime,R,cap2,HPWHloadFullyear,homeWithHP,HPWHeachHouseLoad,floorArea,pMaxAux,homeWithAux,homeWithElectricWH,percentageAt_DT,check)
 % this function performs the simulation of heat pump with resistance
 % heating,n1
-% equipments 
-%
-% Input:
-%  K, number of time steps
-%  n1, number of homes
-%  pMax1, kxn1 matrix of max electical capcity of heat pump, kW
-%  eta1, Kxn1 matrix of heat pump COP
-%  pMaxAux, kxn1 matrix of max resistance power, kW
-%  Tset, (K+1)xn1 matrix of heating temperature setpoint, C
-%  qe, (K+1)xn1 matrix of exogenous thermal power, kW
-%  a1, 1xn1 matrix of discrete-time dynamics parameters
-%  R, 1xn1 vector of thermal resistances, C/kW
-%  theta, Kx1 vector of outdoor temperature, C
-%
-%
-% Output:
-%  p1base, Kxn1 matrix for heat pump electric power, kW
-%  HPload, n1x1 vector for heat pump electrical power, kW
-%  Tbase2, (K+1)xn1 matrix for indoor temperature, C
-
 
 homeWithAux = round(n1*percentageAt_DT*homeWithAux);
 homeWithHP  = round(n1*percentageAt_DT*homeWithHP);

@@ -25,24 +25,24 @@ function [a1,C,R,eta1,Tset,qe,pMax1,pMaxAux]=generateBuildingModelsSummer(n1,dt,
 
 %Building data
                    
-ceilingHeight = repmat(3,1,n1); % ceiling height, m
-rhoc = 3.42e-4; % volumetric thermal capacitance of air, kWh/C/m^3
+ceilingHeight = repmat(3,1,n1);                   % ceiling height, m
+rhoc = 3.42e-4;                                         % volumetric thermal capacitance of air, kWh/C/m^3
 C = trirnd(16,18,1,n1).*(rhoc*floorArea'.*ceilingHeight) ;% thermal capacitance, kWh/C
 
 
 
 R = Rlinearfit';
 
-a1 = exp(-dt./(R.*C));% discrete-time dynamics parameter
+a1 = exp(-dt./(R.*C));                                  % discrete-time dynamics parameter
 
 
-thetaLow = f2c(82); % first temperature point for heat pump COP curve, C
+thetaLow = f2c(82);                                      % first temperature point for heat pump COP curve, C
 thetaHigh = f2c(95); 
 
 
 
-etaLow = trirnd(4.00,4.40,1,n1);  % first COP point trirnd(4.00,4.40,1,n1);   
-etaHigh = trirnd(3.2,3.30,1,n1);  % second COP point  trirnd(3.2,3.30,1,n1);  
+etaLow = trirnd(4.00,4.40,1,n1);                            % first COP point trirnd(4.00,4.40,1,n1);   
+etaHigh = trirnd(3.2,3.30,1,n1);                 % second COP point  trirnd(3.2,3.30,1,n1);  
 
 
 eta1 = (etaLow + (etaHigh-etaLow).*(theta-thetaLow)./(thetaHigh-thetaLow)) ;% COP curve
@@ -72,8 +72,9 @@ solarThermalPower = trirnd(0.25,.40,K,n1).*(0.03*trirnd(0.9,1.1,K,n1).*floorArea
 qe = electricLoadThermalPower + bodyThermalPower + solarThermalPower; % exogenous thermal power, kW (8-12 W/m^2)
 
 
-pMax1 = hpSize.*ones(K,n1);% max electical capcity of heat pump
-pMaxAux = 19.5.*ones(K,n1);% max electical capcity of resistance backup element
+pMax1 = hpSize.*ones(K,n1);                               % max electical capcity of heat pump
+pMaxAux = 19.5.*ones(K,n1);                            % max electical capcity of resistance backup element
 
-
+% fprintf('Mean exogenous thermal power intensity: %.3g W/m^2.\n',...
+%    mean(mean(qe)./floorArea)*1000)
 end

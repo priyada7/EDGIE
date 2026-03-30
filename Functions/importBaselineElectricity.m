@@ -1,4 +1,4 @@
-function [P,fullP] = importBaselineElectricity(individualPower,tStart,tEnd,weatherTime,n1,desiredState,percentageAttached,percentageDetached)
+function [P,fullP,P_detached_window,P_attached_window] = importBaselineElectricity(individualPower,tStart,tEnd,weatherTime,n1,desiredState,percentageAttached,percentageDetached)
 % this function performs the baseline or no electrical load calculation 
 %
 % Input:
@@ -10,7 +10,7 @@ function [P,fullP] = importBaselineElectricity(individualPower,tStart,tEnd,weath
 %
 % Output:
 %  P, Kx1 vector for neighnorhood base electrical power, kW
-%  summerPeak, summer peak aggregate power, kW
+
 
 
 West = {'Montana', 'Idaho', 'Wyoming' ,'Nevada', 'Utah', 'Colorado', 'Arizona', 'New Mexico','Washington', 'Oregon', 'California', 'Alaska', 'Hawaii'};
@@ -34,20 +34,30 @@ end
 detachedIndividualPower = scaling_detached*individualPower.Power./mean(individualPower.Power);
 attachedIndividualPower = scaling_attached*individualPower.Power./mean(individualPower.Power);
 
-nDetached = round(n1*percentageDetached);
+nAttached= round(n1*percentageAttached);
+nDetached=n1-round(n1*percentageAttached);
+
+
 
 nMFRED= size(individualPower,2);
 
 fullP = zeros(size(individualPower,1),n1);
+nT = height(individualPower);  % = 8760
+P_detached = zeros(nT, nDetached);
+P_attached = zeros(nT, n1 - nDetached);
+
 for i = 1 : nDetached
 fullP(:,i) = detachedIndividualPower(:,randi(nMFRED));
+P_detached(:,i) = fullP(:,i);
 end
 for i = nDetached + 1 : n1
 fullP(:,i) = attachedIndividualPower(:,randi(nMFRED));
+P_attached(:,i-nDetached ) = attachedIndividualPower(:,randi(nMFRED));
 end
 fullP = sum(fullP,2);
 P = fullP(individualPower.powerTime>=tStart & individualPower.powerTime<tEnd); % extract a representative load period
 
-
-
+timeMask = individualPower.powerTime >= tStart & individualPower.powerTime <tEnd;
+P_detached_window = P_detached(timeMask, :);
+P_attached_window = P_attached(timeMask, :);
 end

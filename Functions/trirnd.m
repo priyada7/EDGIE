@@ -8,6 +8,7 @@ function X = trirnd(a,c,m,n)
 %
 % Output:
 %   X, an m x n matrix of independent samples.
+
 rng(1);
 % define distribution
 pd = makedist('Triangular','a',a,'b',(a+c)/2,'c',c);

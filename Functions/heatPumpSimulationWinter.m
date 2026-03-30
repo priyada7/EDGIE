@@ -36,20 +36,22 @@ q = zeros(K,n1);             % heat pump thermal power, kW
 p2 = zeros(K,n1);             % electric power, kW
 p_hp = zeros(K,n1); 
 aux = zeros(K,n1); 
+CapRentention = 0.8;
 
+%cap2 =repmat(cap2,1,n1);
 
 
 
 for k=1:K
     qck = (((Tset(k+1,:) - a1.*Tbase2(k,:))./(1-a1) - theta(k))./R - qe(k,:)); % power to exactly track setpoint, kW
     qck(qck<0)=0;
-   
+    %p2 =  max(q(theta)./cop(theta), cap(theta)./cop(theta) + qck - cap(theta));
 
     p2(k,:) =  max(qck./eta2(k,:), cap2(k,:)./eta2(k,:) + qck - cap2(k,:));
     p_hp(k,:) = min(qck ./ eta2(k, :), cap2(k, :) ./ eta2(k, :)); % Heat pump power (limited by capacity)
-    aux(k,:) = max(0,qck - cap2(k,:)); % Aux pump power 
+    aux(k,:) = max(0,qck - cap2(k,:));
 
-    aux(aux>pMaxAux) = pMaxAux(1,1);% Aux pump power (limited by capacity)
+    aux(aux>pMaxAux) = pMaxAux(1,1);
 
     idx = p2(k,:) > pMaxAux(k,:) + cap2(k,:) ./ eta2(k,:);
     p2(k,idx) = pMaxAux(k,idx) + cap2(k,idx) ./ eta2(k,idx);

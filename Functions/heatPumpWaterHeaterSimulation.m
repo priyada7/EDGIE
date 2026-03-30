@@ -16,10 +16,8 @@ function [HPWHload,HPWHeachHouseLoad]=heatPumpWaterHeaterSimulation(K,L,pMaxHP,e
 %
 %
 % Output:
-%  p1basehpwh, KxL matrix for heat-pump water heater electric power, kW
 %  HPWHload, Lx1 vector for heat-pump water heater electrical power, kW
-%  Tbasew, (K+1)xL matrix for water temperature, C
-%  Tsetw, (K+1)xL matrix of heating temperature setpoint, C
+
 
 Kw=length(ww);
 Qcw2=zeros(Kw,L);

@@ -22,19 +22,23 @@ function [eta1,qe]=generateBuildingModelsWinter(zone,n1,K,theta,P,solar,floorAre
 %  pMax1, kxn1 matrix of max electical capcity of heat pump, kW
 %  pMaxAux, kxn1 matrix of max resistance power, kW
 
-thetaLow = f2c(5); % first temperature point for heat pump COP curve, C
+thetaLow = f2c(5);                                      % first temperature point for heat pump COP curve, C
 thetaHigh = f2c(45); 
 
+% etaLow = trirnd(3,4,1,n1);                            % first COP point
+% etaHigh = etaLow + 1.5 + trirnd(0,0.5,1,n1);            % second COP point
+%  eta1 = etaLow + (etaHigh-etaLow).*(theta-thetaLow)./(thetaHigh-thetaLow); % COP curve
+%  eta1(eta1 < 1)=1;
 
     if zone > 4
        
-        etaLow = trirnd(2.2,2.4,1,n1); % first COP point 
-        etaHigh =etaLow + 1.5 + trirnd(0,0.5,1,n1);% second COP point
+        etaLow = trirnd(2.2,2.4,1,n1);                            % first COP point 2.2 2.4 trirnd(1.5,1.8,1
+        etaHigh =etaLow + 1.5 + trirnd(0,0.5,1,n1);            % second COP point
         eta1 = etaLow + (etaHigh-etaLow).*(theta-thetaLow)./(thetaHigh-thetaLow); % COP curve
         eta1(eta1 < 1)=1;
     else
-        etaLow =  trirnd(1.5,1.8,1,n1); % first COP point   
-        etaHigh = etaLow + 1.5 + trirnd(0,0.5,1,n1); % second COP point
+        etaLow =  trirnd(1.5,1.8,1,n1);                             % first COP point  trirnd(1.5,2,1,n1); trirnd(1.1,1.5,   1,homeWithHP);    
+        etaHigh = etaLow + 1.5 + trirnd(0,0.5,1,n1);            % second COP point
         eta1 = etaLow + (etaHigh-etaLow).*(theta-thetaLow)./(thetaHigh-thetaLow); % COP curve
         eta1(eta1 < 1)=1;
     end

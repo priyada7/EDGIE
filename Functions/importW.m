@@ -19,10 +19,12 @@ weatherData = readtable(fileName,opts);
 % extract data and convert units
 timeStamp = weatherData{:,1}; % time stamp
 if timeStamp(1).Year < 2000, timeStamp.Year = timeStamp.Year + 2000; end
-timeZoneAdjust = weatherData{:,5};
-timeStamp = timeStamp + hours(timeZoneAdjust); % convert UTC to eastern
-temperature = weatherData{:,6}; % outdoor air temperature, C
-shortwave = weatherData{:,7}/1000; % global horizontal shortwave irradiance, kW/m^2
+
+%timeZoneAdjust = weatherData{:,5};
+%timeStamp = timeStamp + hours(timeZoneAdjust); % convert UTC to eastern
+
+temperature = weatherData{:,2}; % outdoor air temperature, C
+shortwave = weatherData{:,6}/1000; % global horizontal shortwave irradiance, kW/m^2
 % humidity = weatherData{:,9}; % relative humidity
 % windspeed = weatherData{:,10}; % wind speed, m/s
 

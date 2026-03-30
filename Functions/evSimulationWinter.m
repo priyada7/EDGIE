@@ -30,6 +30,8 @@ eBase = zeros(K+1,n2); % stored energy, kWh
 eBase(1,:) = e0;
 pcBase = zeros(K,n2); % home or work charge power, kW
 pdBase = zeros(K,n2); % discharge power, kW
+
+%%
 for k=1:K
     % initialize charging power with previous charging power
     if k==1
@@ -56,6 +58,10 @@ end
 phBase = atHome.*pcBase; % baseline home charge power, kW
 pwBase = atWork.*pcBase; % baseline work charge power, kW
 
-
+idxNeg = find(eBase./eMax < 0);
+[rowIdx, colIdx] = find(eBase ./ eMax < 0);
+if ~isempty(idxNeg)
+    error('Simulation stopped: ebase./eMin has negative values at indices: %s', mat2str(idxNeg));
+end
 
 end
