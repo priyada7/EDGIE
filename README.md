@@ -18,8 +18,17 @@ TROUBLESHOOT
 
 In case of any issue, feel free to reach out at priyada@purdue.edu
 
-MIT License
+CITATIONS
+------------
+This repository accompanies the following paper:
 
+Priyadarshan, & Kircher, K. J. (2026). TBD
+
+BibTeX citation: @ARTICLE{TBD}
+}
+
+MIT License
+------------
 Copyright (c) 2026 Priyadarshan
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
