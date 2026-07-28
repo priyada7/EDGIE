@@ -1,8 +1,8 @@
 clear
-addpath 'XXX/EDGIE Github/Functions_github'
-addpath 'XXX/EDGIE Github/InputFiles_github'
+addpath 'XXX/EDGIE Github/EDGIE-main/Functions_github'
+addpath 'XXX/EDGIE Github/EDGIE-main/InputFiles_github'
 
-baseDir = 'XXX/EDGIE Github/ComStock';
+baseDir = 'XXX/EDGIE Github/EDGIE-main/ComStock';
 
 tic
 batteryDeg =   1; % battery degradation with outside temperature is implemented
