@@ -1,8 +1,8 @@
 clear
-addpath '/Users/priyadarshan/Library/CloudStorage/Box-Box/Herricks/Codes/EV/v2h/v2h new/untitled folder/EDGIE Github/Functions_github'
-addpath '/Users/priyadarshan/Library/CloudStorage/Box-Box/Herricks/Codes/EV/v2h/v2h new/untitled folder/EDGIE Github/InputFiles_github'
+addpath 'XXX/EDGIE Github/Functions_github'
+addpath 'XXX/EDGIE Github/InputFiles_github'
 
-baseDir = '/Users/priyadarshan/Library/CloudStorage/Box-Box/Herricks/Codes/EV/v2h/v2h new/untitled folder/EDGIE Github/ComStock';
+baseDir = 'XXX/EDGIE Github/ComStock';
 
 tic
 batteryDeg =   1; % battery degradation with outside temperature is implemented
