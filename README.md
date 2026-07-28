@@ -12,6 +12,8 @@ EDGIE needs MATLAB (https://www.mathworks.com/help/install/ug/install-products-w
 
 The repository includes sample weather files and commercial load profiles. However, these files for any specific county can be downloaded from https://data.openei.org/s3_viewer?bucket=oedi-data-lake&prefix=nrel-pds-building-stock%2Fend-use-load-profiles-for-us-building-stock%2F2025%2Fcomstock_amy2018_release_3%2F
 
+Please view ReadME.pdf for the required steps to install EDGIE.
+
 
 TROUBLESHOOT
 ------------
