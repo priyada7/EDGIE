@@ -6,9 +6,6 @@ baseDir = 'XXX/EDGIE Github/EDGIE-main/ComStock';
 
 tic
 batteryDeg =   1; % battery degradation with outside temperature is implemented
-matpower   =   0; % set 1 if voltage regulations needs to be solved
-transformer=   0; % set 1 if thermal model of transformer needs to be solved
-optimization = 0; % set 1 for v2h
 waterheater = 3;  % set 1 for resitance 2 for heat pump only 3 for hybrid
 sizing = 3;       % set 1 for cooling 2 for heating 3 for max of heating or cooling 
 normPrice=1.5e5;
