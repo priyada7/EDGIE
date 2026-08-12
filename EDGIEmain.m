@@ -11,6 +11,7 @@ sizing = 3;       % set 1 for cooling 2 for heating 3 for max of heating or cool
 waterfile    = 'DHWEventGeneratorOutput.csv';                     % load water scheduler file
 rng(1)
 
+
 states = {
  'MN','Minnesota'
 %  'DC','District_of_Columbia'
