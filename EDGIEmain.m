@@ -106,7 +106,7 @@ coolingtemp = stateAZ.x1__CoolingTemp___F_;
 heatingtemp = stateAZ.x99__HeatingTemp___F_;
 %%
 
-
+delta = stateAZ.Delta;
    oneWayCommuteTime = stateAZ.MeanCommutingTime ;
 %%
 UvalueWall = stateAZ.Uwall;
@@ -181,7 +181,8 @@ for stateIdx = 27 %1:length(arizonacities)
             end
 
             commuteDistance = (oneWayCommuteTime(stateIdx))*commuteSpeed/60;
-
+            gamma = 0.65;
+            lambda = (delta(stateIdx)+gamma/(1-gamma))/(1+gamma/(1-gamma));
          
 
     
@@ -666,7 +667,7 @@ upgradeReqMW = ( FutureHeadroom*max(data{stateIdx, 11},data{stateIdx, 12}) - sel
 if (upgradeReqMW <= 0)
     data{stateIdx,15} =  0;
 else
-    data{stateIdx,15} = (max(0,960*upgradeReqMW*s/n1));
+    data{stateIdx,15} = (max(0,lambda*960*upgradeReqMW*s/n1));
 end
 data{stateIdx,16} = zone;
 
@@ -686,7 +687,7 @@ data{stateIdx,23}=upgradeReqMWCommercial;
 if (upgradeReqMWCommercial <= 0)
     data{stateIdx,24} =  0;
 else
-    data{stateIdx,24} = (max(0,960*upgradeReqMWCommercial*s/n1));
+    data{stateIdx,24} = (max(0,lambda*960*upgradeReqMWCommercial*s/n1));
 end
 data{stateIdx,25} = housingUnits*data{stateIdx,24};
 
