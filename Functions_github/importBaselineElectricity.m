@@ -52,7 +52,7 @@ P_detached(:,i) = fullP(:,i);
 end
 for i = nDetached + 1 : n1
 fullP(:,i) = attachedIndividualPower(:,randi(nMFRED));
-P_attached(:,i-nDetached ) = attachedIndividualPower(:,randi(nMFRED));
+P_attached(:,i-nDetached ) = fullP(:,i); % attachedIndividualPower(:,randi(nMFRED));
 end
 fullP = sum(fullP,2);
 P = fullP(individualPower.powerTime>=tStart & individualPower.powerTime<tEnd); % extract a representative load period
