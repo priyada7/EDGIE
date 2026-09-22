@@ -139,7 +139,7 @@ ResidentialPrice = stateAZ.Residential;
 
 TodaysHeadroom = round(trirnd(1.15, 1.36, length(USAcountyNAme), 1), 2);
 FutureHeadroom = 1.2;
-
+delta = stateAZ.Delta;
 houseElecWH = stateAZ.ElectricWH_;
 
 sedans = stateAZ.Cars_;
@@ -183,7 +183,8 @@ for stateIdx =  27 %1:length(arizonacities)
             end
 
             commuteDistance = (oneWayCommuteTime(stateIdx))*commuteSpeed/60;
-
+     gamma = 0.65;
+            lambda = (delta(stateIdx)+gamma/(1-gamma))/(1+gamma/(1-gamma));
     lat = USAstatelat(stateIdx);
     lng = USAstatelng(stateIdx);
     Uwall = UvalueWall(stateIdx);
@@ -650,7 +651,7 @@ e0Winter(idx) = eMinWinter(idx) ./ etad(idx);
 scenario=1;
   [eWinter,phWinter,v2hEligible,cvx_statusW]=EV_optimization_winter_v2h_v3(Km,p1baseWinter,p1basehpwhWinter,a2,e0Winter,eMax,eMinWinter,tau,ecWinter,dt,pdMax,pcMax,atWork,atHome,...
  n2,Pwinter,pWorkWinter_future,etac,etad,t,tw,th,onRoad,n1,todaysPeakresidential,selectedHeadroom,FutureHeadroom,peaktodayscommercial,U_units2bldg,A_attached_bldg,A_detached_home,PdetachedWinter,PattachedWinter,n1d,n1a,cars_attached,cars_detached,ev_start_attached,...
- EnergyCommercial,EnergyResidential,normPrice,EV_to_home,size_detached,size_attached,n_buildings,building_to_home,cars_per_building,frac,A_hv,C_bh,D_bv,scenario,atGrocery,groceryEnergyWinter,atErrands,errandEnergyWinter);
+ EnergyCommercial,EnergyResidential,normPrice,EV_to_home,size_detached,size_attached,n_buildings,building_to_home,cars_per_building,frac,A_hv,C_bh,D_bv,scenario,atGrocery,groceryEnergyWinter,atErrands,errandEnergyWinter,lambda);
 
 data{stateIdx, 11}=quantile(Pwinter/s + HPWHloadWinter/s + sum(phBaseWinter,2)/s + HPloadWinter/s,0.99);
 LoadOptimizedWinter = Pwinter/s + sum(p1basehpwhWinter,2)/s + sum(atHome.*phWinter,2)/s + sum(p1baseWinter,2)/s;
@@ -697,7 +698,7 @@ e0Summer(idx) = eMinSummer(idx) ./ etad(idx);
 
 [eSummer,phSummer,HousingUnitsload,cvx_statusS]=EV_optimization_summer_v2h_v3(Km,p1baseSummer,p1basehpwhSummer,a2,e0Summer,eMax,eMinSummer,tau,ecSummer,dt,pdMax,pcMax,atWork,atHome,...
 n2,Psummer,pWorkSummer_future,etac,etad,t,tw,th,onRoad,n1,todaysPeakresidential,selectedHeadroom,FutureHeadroom,peaktodayscommercial,U_units2bldg,A_attached_bldg,A_detached_home,PdetachedSummer,PattachedSummer,n1d,n1a,cars_attached,cars_detached,ev_start_attached,...
-EnergyCommercial,EnergyResidential,normPrice,v2hEligible,A_hv,C_bh,D_bv,scenario,atGrocery,groceryEnergySummer,atErrands,errandEnergySummer);
+EnergyCommercial,EnergyResidential,normPrice,v2hEligible,A_hv,C_bh,D_bv,scenario,atGrocery,groceryEnergySummer,atErrands,errandEnergySummer,lambda);
 
  data{stateIdx, 12}=quantile(Psummer/s + HPWHloadSummer/s + sum(phBaseSummer,2)/s + HPloadSummer/s,0.99);
 
@@ -724,7 +725,7 @@ upgradeReqMW = ( FutureHeadroom*max(data{stateIdx, 11},data{stateIdx, 12}) - sel
 if (upgradeReqMW <= 0)
     data{stateIdx,15} =  0;
 else
-    data{stateIdx,15} = (max(0,960*upgradeReqMW*s/n1));
+    data{stateIdx,15} = (max(0,lambda*960*upgradeReqMW*s/n1));
 end
 data{stateIdx,16} = zone;
 
@@ -744,7 +745,7 @@ data{stateIdx,23}=upgradeReqMWCommercial;
 if (upgradeReqMWCommercial <= 0)
     data{stateIdx,24} =  0;
 else
-    data{stateIdx,24} = (max(0,960*upgradeReqMWCommercial*s/n1));
+    data{stateIdx,24} = (max(0,lambda*960*upgradeReqMWCommercial*s/n1));
 end
 data{stateIdx,25} = housingUnits*data{stateIdx,28};
 
