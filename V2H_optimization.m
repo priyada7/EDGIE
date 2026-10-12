@@ -552,8 +552,8 @@ end
 
 %% data compile
 
-resModelPeakWinter = quantile(Pwinter + HPWHloadWinter + sum(phBaseWinter,2) + HPloadWinter,0.99); % kW (your model's residential peak)
-resModelPeakSummer = quantile(Psummer + HPWHloadSummer + sum(phBaseSummer,2) + HPloadSummer,0.99);
+resModelPeakWinter = quantile(Pwinter + HPWHloadWinter  + HPloadWinter,0.99); % kW (your model's residential peak)
+resModelPeakSummer = quantile(Psummer + HPWHloadSummer  + HPloadSummer,0.99);
 
 comStockPeakBaseline = 0.9 ;%PWh
 EIApeakBaseline = 1.390; %PWh
