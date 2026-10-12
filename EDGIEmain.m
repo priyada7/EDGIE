@@ -608,8 +608,8 @@ data{stateIdx, 13}=-data{stateIdx, 12}+data{stateIdx, 11};
 data{stateIdx,14} = selectedHeadroom*data{stateIdx, 10} - FutureHeadroom*max(data{stateIdx, 11},data{stateIdx, 12});
 
 %%  
-resModelPeakWinter = quantile(Pwinter + HPWHloadWinter + sum(phBaseWinter,2) + HPloadWinter,0.99); 
-resModelPeakSummer = quantile(Psummer + HPWHloadSummer + sum(phBaseSummer,2) + HPloadSummer,0.99);
+resModelPeakWinter = quantile(Pwinter + HPWHloadWinter  + HPloadWinter,0.99); 
+resModelPeakSummer = quantile(Psummer + HPWHloadSummer  + HPloadSummer,0.99);
 
 comStockPeakBaseline = 0.9 ;%PWh
 EIApeakBaseline = 1.390; %PWh
